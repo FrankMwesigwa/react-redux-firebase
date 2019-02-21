@@ -1,26 +1,13 @@
 import React, { Component } from 'react';
-import axios from 'axios'
 import { Link } from 'react-router-dom'
 import BlogSelected from '../images/blog_selected.png'
+import { connect } from 'react-redux'
 
  class Home extends Component {
 
-    state = {
-        posts:[]
-    }
-
-    componentDidMount = () => {
-        axios.get('https://jsonplaceholder.typicode.com/posts')
-            .then(res => {
-                console.log(res)
-                this.setState({
-                    posts:res.data.slice(0,10)
-                })
-            })
-    }
-
   render() {
-      const { posts } = this.state
+      console.log(this.props)
+      const { posts } = this.props
       const postsList = posts.length > 0 ? (
           posts.map(post => {
               return(
@@ -29,7 +16,7 @@ import BlogSelected from '../images/blog_selected.png'
                         <Link to={'/posts/' + post.id}>
                             <span className="card-title">{post.title}</span>
                         </Link>
-                        <p>{post.body}</p>
+                        <p>{post.content}</p>
                     </div>
                   </div>
               )
@@ -49,4 +36,10 @@ import BlogSelected from '../images/blog_selected.png'
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+    return {
+        posts: state.posts
+    }
+}
+
+export default connect(mapStateToProps)(Home);
