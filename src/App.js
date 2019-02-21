@@ -1,38 +1,27 @@
 import React, { Component } from 'react';
-import AddTodo from './components/addTodo'
-import Todos from './components/todos'
+import { BrowserRouter, Route , Switch } from 'react-router-dom';
+
+import Home from './components/home'
+import About from './components/about'
+import Contact from './components/contact'
+import NavBar from './components/navBar'
+import PostDetail from './components/postDetail'
 
 class App extends Component {
 
-  state = {
-    todos:[
-      {id:1, content:'Finish up setting up Flask'},
-      {id:2, content:'React Redux Ninja'}
-    ]
-  }
-
-  deleteTodo = (id) => {
-    const todos = this.state.todos.filter(todo => {
-      return todo.id !== id
-    });
-    this.setState({todos:todos})
-  }
-
-  addTodo = (todo) => {
-    todo.id = Math.random();
-    let todos = [...this.state.todos, todo];
-    this.setState({todos:todos})
-  }
-
-
   render() {
     return (
-      <div className="App">
-      
-        <Todos todos={this.state.todos} deleteTodo={this.deleteTodo} />
-        <AddTodo addTodo={this.addTodo} />
-        
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <NavBar/>
+          <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/about" component={About} />
+              <Route path="/contact" component={Contact} />
+              <Route path="/posts/:post_id" component={PostDetail} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
