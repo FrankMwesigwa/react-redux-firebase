@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route , Switch } from 'react-router-dom';
 
-import Home from './components/home'
-import About from './components/about'
-import Contact from './components/contact'
-import NavBar from './components/navBar'
-import PostDetail from './components/postDetail'
+import NavBar from './components/layout/navBar'
+import Dashboard from './components/dashboard/dashboard'
+import ProjectDetails from './components/project/projectDetails'
+import SignIn from './components/auth/signIn'
+import SignUp from './components/auth/signUp'
+import CreateProject from './components/project/createProject'
 
 class App extends Component {
 
@@ -15,10 +16,11 @@ class App extends Component {
         <div className="App">
           <NavBar/>
           <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/about" component={About} />
-              <Route path="/contact" component={Contact} />
-              <Route path="/posts/:post_id" component={PostDetail} />
+            <Route exact path='/' component={Dashboard} />
+            <Route path='/project/:id' component={ProjectDetails} />
+            <Route path='/signin' component={SignIn} />
+            <Route path='/signup' component={SignUp} />
+            <Route path='/create' component={CreateProject} />
           </Switch>
         </div>
       </BrowserRouter>
