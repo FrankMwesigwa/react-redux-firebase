@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux' // connect this component to redux store
+import { createProject } from '../../store/actions/projectActions' // here we are dispatching an action
 
 class CreteProject extends Component {
     state = {
@@ -14,7 +16,7 @@ class CreteProject extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state)
+        this.props.createProject(this.state)
     }
 
   render() {
@@ -28,8 +30,7 @@ class CreteProject extends Component {
             </div>
             <div className="input-field">
                 <label htmlFor="content">Project Content</label>
-                <input type="password" id="password" onChange={this.handleChange} />
-                <textarea id="content" className="materialize-textarea"></textarea>
+                <textarea id="content" className="materialize-textarea" onChange={this.handleChange} />
             </div>
             <div className="input-field">
                 <button className="btn pink lighten-1 z-depth-0">Create</button>
@@ -40,4 +41,10 @@ class CreteProject extends Component {
   }
 }
 
-export default CreteProject
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createProject: (project) => dispatch(createProject(project))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(CreteProject);
