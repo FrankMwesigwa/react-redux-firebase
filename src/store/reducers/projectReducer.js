@@ -1,6 +1,6 @@
 
 const initialState = {
-    posts: [
+    projects: [
         {id: 1, title: 'React Redux Ninja', content: 'After taking this bootcamp you will become a master ninja'},
         {id: 2, title: 'FireBase Advanced', content: 'This is a fire base advanced course for ninjas'},
         {id: 3, title: 'BlockChain Development', content: 'Highest software developers in the world'},
@@ -8,9 +8,9 @@ const initialState = {
     ]
 }
 
-const rootReducer = ( state= initialState, action ) => {
+const projectReducer = (state = initialState, action) => {
     return state
 
 }
 
-export default rootReducer;
+export default projectReducer
